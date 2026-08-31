@@ -1,0 +1,1461 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Mohamad Al-Kahwaji — Laravel & PHP Web Developer. Building complete web applications, REST APIs, dashboards and integrations."
+    />
+
+    <meta name="theme-color" content="#0b0f14" />
+
+    <title>Mohamad Al-Kahwaji | Laravel & PHP Developer</title>
+
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --bg-secondary: #10161f;
+        --surface: #121922;
+        --surface-hover: #17212d;
+        --primary: #45d6b0;
+        --primary-hover: #5ee5c2;
+        --blue: #7ea8ff;
+        --white: #f4f7fb;
+        --text: #d4dce7;
+        --muted: #8996a8;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-hover: rgba(69, 214, 176, 0.32);
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+        --radius: 16px;
+        --container: 1160px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      html {
+        scroll-padding-top: 90px;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+        background: linear-gradient(
+          180deg,
+          #0b0f14 0%,
+          #0d1219 45%,
+          #0b0f14 100%
+        );
+        color: var(--white);
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+          );
+        background-size: 48px 48px;
+        mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.7),
+          transparent 75%
+        );
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button {
+        font-family: inherit;
+      }
+
+      .container {
+        width: min(var(--container), 90%);
+        margin: auto;
+      }
+
+      .text-primary {
+        color: var(--primary);
+      }
+
+      .text-blue {
+        color: var(--blue);
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+      /* =========================
+       HEADER
+    ========================= */
+
+      header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 100;
+        background: rgba(11, 15, 20, 0.88);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav {
+        height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+      }
+
+      .logo {
+        color: var(--white);
+        font-size: 21px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        white-space: nowrap;
+      }
+
+      .logo span {
+        color: var(--primary);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        position: relative;
+        color: var(--muted);
+        font-size: 14px;
+        transition: color 0.25s ease;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -7px;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.25s ease;
+      }
+
+      html[dir="ltr"] .nav-links a::after {
+        right: auto;
+        left: 0;
+      }
+
+      .nav-links a:hover {
+        color: var(--white);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .language-btn,
+      .menu-btn {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        padding: 8px 13px;
+        cursor: pointer;
+        transition:
+          background 0.25s ease,
+          border-color 0.25s ease,
+          color 0.25s ease;
+      }
+
+      .language-btn:hover,
+      .menu-btn:hover {
+        color: var(--primary);
+        border-color: var(--border-hover);
+        background: rgba(69, 214, 176, 0.05);
+      }
+
+      .menu-btn {
+        display: none;
+        font-size: 19px;
+      }
+      /* =========================
+       HERO
+    ========================= */
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-top: 100px;
+        padding-bottom: 70px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        align-items: center;
+        gap: 75px;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--primary);
+        border: 1px solid rgba(69, 214, 176, 0.2);
+        background: rgba(69, 214, 176, 0.045);
+        border-radius: 30px;
+        padding: 6px 13px;
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+
+      .hero-badge span:first-child {
+        width: 7px;
+        height: 7px;
+        background: var(--primary);
+        border-radius: 50%;
+      }
+
+      .hero h1 {
+        font-size: clamp(44px, 7vw, 76px);
+        line-height: 1.1;
+        letter-spacing: -2.5px;
+        margin-bottom: 17px;
+      }
+
+      .hero h1 span {
+        color: var(--primary);
+      }
+
+      .hero h2 {
+        color: var(--blue);
+        font-size: clamp(20px, 3vw, 29px);
+        line-height: 1.4;
+        margin-bottom: 20px;
+      }
+
+      .hero-description {
+        max-width: 690px;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 2;
+      }
+
+      .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 46px;
+        padding: 10px 19px;
+        border-radius: 9px;
+        font-size: 14px;
+        font-weight: 700;
+        transition:
+          transform 0.25s ease,
+          background 0.25s ease,
+          border-color 0.25s ease,
+          color 0.25s ease;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: #07110e;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--border-hover);
+        color: var(--primary);
+        transform: translateY(-2px);
+      }
+      /* =========================
+       CODE CARD
+    ========================= */
+
+      .code-card {
+        position: relative;
+        background: #101720;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+        transform: rotate(1deg);
+        transition:
+          transform 0.35s ease,
+          border-color 0.35s ease;
+      }
+
+      .code-card:hover {
+        transform: rotate(0deg) translateY(-4px);
+        border-color: var(--border-hover);
+      }
+
+      .code-top {
+        display: flex;
+        gap: 7px;
+        margin-bottom: 22px;
+      }
+
+      .code-top i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: block;
+      }
+
+      .red {
+        background: #e56b6f;
+      }
+
+      .yellow {
+        background: #d6ad55;
+      }
+
+      .green {
+        background: var(--primary);
+      }
+
+      .code-card pre {
+        direction: ltr;
+        text-align: left;
+        white-space: pre-wrap;
+        color: #b9c5d5;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 13px;
+        line-height: 2;
+      }
+
+      .code-key {
+        color: #83aaff;
+      }
+
+      .code-string {
+        color: #63d8bd;
+      }
+      /* =========================
+       SECTIONS
+    ========================= */
+
+      section {
+        padding: 100px 0 20px;
+      }
+
+      .section-heading {
+        margin-bottom: 32px;
+      }
+
+      .section-label {
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+      }
+
+      .section-title {
+        font-size: clamp(29px, 5vw, 42px);
+        line-height: 1.3;
+        letter-spacing: -0.8px;
+        margin-bottom: 10px;
+      }
+
+      .section-description {
+        color: var(--muted);
+        max-width: 720px;
+      }
+      /* =========================
+       CARDS
+    ========================= */
+
+      .card {
+        background: rgba(18, 25, 34, 0.88);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px;
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          background 0.3s ease;
+      }
+
+      .card:hover {
+        background: var(--surface-hover);
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+      }
+      /* =========================
+       ABOUT
+    ========================= */
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 20px;
+      }
+
+      .about-text {
+        color: var(--text);
+        font-size: 16px;
+        line-height: 2.05;
+      }
+
+      .info-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .info-item {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 11px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .info-item:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .info-item strong {
+        color: var(--primary);
+        font-size: 13px;
+      }
+
+      .info-item span {
+        color: var(--text);
+        font-size: 14px;
+      }
+      /* =========================
+       SERVICES
+    ========================= */
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .service-icon {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        color: var(--primary);
+        background: rgba(69, 214, 176, 0.08);
+        border: 1px solid rgba(69, 214, 176, 0.14);
+        border-radius: 11px;
+        font-size: 18px;
+        margin-bottom: 17px;
+      }
+
+      .card h3 {
+        font-size: 19px;
+        margin-bottom: 8px;
+      }
+
+      .card p {
+        color: var(--muted);
+        line-height: 1.9;
+        font-size: 14px;
+      }
+      /* =========================
+       PROJECTS
+    ========================= */
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .project-card {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .project-image {
+        height: 190px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background: linear-gradient(135deg, #17252d, #121c27);
+      }
+
+      .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .project-card:hover .project-image img {
+        transform: scale(1.025);
+      }
+
+      .project-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex: 1;
+        padding: 23px;
+      }
+
+      .project-content h3 {
+        color: var(--white);
+      }
+
+      .project-tech {
+        color: var(--blue);
+        font-size: 12px;
+        line-height: 1.8;
+      }
+
+      .project-link {
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 700;
+        margin-top: auto;
+        padding-top: 7px;
+        transition: color 0.25s ease;
+      }
+
+      .project-link:hover {
+        color: var(--primary-hover);
+      }
+      /* =========================
+       SKILLS
+    ========================= */
+
+      .skills-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+
+      .skill {
+        color: var(--text);
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.025);
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13px;
+        transition:
+          color 0.25s ease,
+          border-color 0.25s ease,
+          background 0.25s ease;
+      }
+
+      .skill:hover {
+        color: var(--primary);
+        border-color: var(--border-hover);
+        background: rgba(69, 214, 176, 0.04);
+      }
+      /* =========================
+       CONTACT
+    ========================= */
+
+      .contact-card {
+        text-align: center;
+        max-width: 850px;
+        margin: auto;
+        padding: 48px 25px;
+      }
+
+      .contact-card .section-description {
+        margin: auto;
+      }
+
+      .contact-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 27px;
+      }
+
+      .socials {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 23px;
+      }
+
+      .socials a {
+        color: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 8px 15px;
+        font-size: 13px;
+        transition:
+          color 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .socials a:hover {
+        color: var(--primary);
+        border-color: var(--border-hover);
+      }
+      /* =========================
+       FOOTER
+    ========================= */
+
+      footer {
+        text-align: center;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        margin-top: 90px;
+        padding: 23px 0;
+        font-size: 13px;
+      }
+      /* =========================
+       MOBILE
+    ========================= */
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-grid {
+          gap: 45px;
+        }
+        .code-card {
+          max-width: 650px;
+          width: 100%;
+          margin: auto;
+        }
+        .services-grid,
+        .projects-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 650px) {
+        nav {
+          height: 68px;
+        }
+        .logo {
+          font-size: 18px;
+        }
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 68px;
+          right: 5%;
+          left: 5%;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 10px;
+          background: #101720;
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          box-shadow: var(--shadow);
+        }
+        .nav-links.active {
+          display: flex;
+        }
+        .nav-links li a {
+          display: block;
+          padding: 10px;
+        }
+        .nav-links a::after {
+          display: none;
+        }
+        .menu-btn {
+          display: block;
+        }
+        .hero {
+          min-height: auto;
+          padding-top: 115px;
+          padding-bottom: 50px;
+        }
+        .hero h1 {
+          font-size: 44px;
+          letter-spacing: -1.8px;
+        }
+        .hero h2 {
+          font-size: 21px;
+        }
+        .hero-description {
+          font-size: 15px;
+          line-height: 1.95;
+        }
+        .hero-buttons {
+          flex-direction: column;
+        }
+        .btn {
+          width: 100%;
+        }
+        section {
+          padding-top: 80px;
+        }
+        .services-grid,
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+        .project-image {
+          height: 200px;
+        }
+        .code-card {
+          transform: none;
+        }
+        .code-card:hover {
+          transform: translateY(-3px);
+        }
+        .code-card pre {
+          font-size: 11px;
+          line-height: 1.9;
+        }
+        .contact-buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================
+       HEADER
+  ========================= -->
+
+    <header>
+      <div class="container">
+        <nav>
+          <a href="#home" class="logo"> Mohamad<span>.dev</span> </a>
+
+          <ul class="nav-links" id="navLinks">
+            <li>
+              <a href="#about" data-ar="عني" data-en="About"> عني </a>
+            </li>
+
+            <li>
+              <a href="#services" data-ar="الخدمات" data-en="Services">
+                الخدمات
+              </a>
+            </li>
+
+            <li>
+              <a href="#projects" data-ar="المشاريع" data-en="Projects">
+                المشاريع
+              </a>
+            </li>
+
+            <li>
+              <a href="#skills" data-ar="المهارات" data-en="Skills">
+                المهارات
+              </a>
+            </li>
+
+            <li>
+              <a href="#contact" data-ar="تواصل معي" data-en="Contact">
+                تواصل معي
+              </a>
+            </li>
+          </ul>
+
+          <div class="nav-actions">
+            <button class="language-btn" id="languageBtn">English</button>
+
+            <button class="menu-btn" id="menuBtn">☰</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- =========================
+         HERO
+    ========================= -->
+
+      <section class="hero" id="home">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content">
+              <div class="hero-badge">
+                <span></span>
+
+                <span
+                  data-ar="متاح لاستلام مشاريع جديدة"
+                  data-en="Available for new projects"
+                >
+                  متاح لاستلام مشاريع جديدة
+                </span>
+              </div>
+
+              <h1>
+                Mohamad
+                <span>Al-Kahwaji</span>
+              </h1>
+
+              <h2
+                data-ar="مطور ويب متخصص في Laravel وPHP"
+                data-en="Web Developer specialized in Laravel & PHP"
+              >
+                مطور ويب متخصص في Laravel وPHP
+              </h2>
+
+              <p
+                class="hero-description"
+                data-ar="أطوّر تطبيقات ويب متكاملة، من تصميم قاعدة البيانات والـ Backend وواجهات API إلى الواجهات ولوحات التحكم والتكاملات الخارجية. أستلم المشروع كمنظومة متكاملة من الفكرة حتى الإطلاق."
+                data-en="I build complete web applications, from database design, backend systems and APIs to frontend interfaces, admin dashboards, and third-party integrations. I can handle the project as a complete system from idea to launch."
+              >
+                أطوّر تطبيقات ويب متكاملة، من تصميم قاعدة البيانات والـ Backend
+                وواجهات API إلى الواجهات ولوحات التحكم والتكاملات الخارجية.
+                أستلم المشروع كمنظومة متكاملة من الفكرة حتى الإطلاق.
+              </p>
+
+              <div class="hero-buttons">
+                <a
+                  href="#projects"
+                  class="btn btn-primary"
+                  data-ar="مشاهدة مشاريعي ↓"
+                  data-en="View My Projects ↓"
+                >
+                  مشاهدة مشاريعي ↓
+                </a>
+
+                <a
+                  href="#contact"
+                  class="btn btn-outline"
+                  data-ar="تواصل معي"
+                  data-en="Let's Talk"
+                >
+                  تواصل معي
+                </a>
+              </div>
+            </div>
+
+            <!-- Code Preview -->
+
+            <div class="code-card">
+              <div class="code-top">
+                <i class="red"></i>
+                <i class="yellow"></i>
+                <i class="green"></i>
+              </div>
+
+              <pre><span class="code-key">const</span> developer = {
+  name: <span class="code-string">"Mohamad Al-Kahwaji"</span>,
+  focus: <span class="code-string">"Laravel & PHP"</span>,
+  backend: [<span class="code-string">"Laravel"</span>, <span class="code-string">"REST APIs"</span>],
+  database: <span class="code-string">"MySQL"</span>,
+  frontend: [<span class="code-string">"React"</span>, <span class="code-string">"Inertia"</span>],
+  available: <span class="code-key">true</span>
+};</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         ABOUT
+    ========================= -->
+
+      <section id="about">
+        <div class="container">
+          <div class="section-heading">
+            <div
+              class="section-label"
+              data-ar="تعرف عليّ"
+              data-en="Get To Know Me"
+            >
+              تعرف عليّ
+            </div>
+
+            <h2 class="section-title" data-ar="عنّي" data-en="About Me">
+              عنّي
+            </h2>
+          </div>
+
+          <div class="about-grid">
+            <div class="card">
+              <p
+                class="about-text"
+                data-ar="أنا محمد القهواجي، مطور ويب أركز بشكل أساسي على Laravel وPHP. أعمل على بناء الأنظمة من الصفر، بدايةً من تحليل المتطلبات وتصميم قاعدة البيانات، وصولاً إلى تطوير الـ Backend وREST APIs والواجهات ولوحات التحكم والتكاملات المختلفة."
+                data-en="I'm Mohamad Al-Kahwaji, a web developer primarily focused on Laravel and PHP. I build systems from scratch, starting with requirements analysis and database design, through backend development, REST APIs, frontend interfaces, admin dashboards, and external integrations."
+              >
+                أنا محمد القهواجي، مطور ويب أركز بشكل أساسي على Laravel وPHP.
+                أعمل على بناء الأنظمة من الصفر، بدايةً من تحليل المتطلبات وتصميم
+                قاعدة البيانات، وصولاً إلى تطوير الـ Backend وREST APIs
+                والواجهات ولوحات التحكم والتكاملات المختلفة.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="info-list">
+                <div class="info-item">
+                  <strong data-ar="التخصص الأساسي" data-en="Main Focus">
+                    التخصص الأساسي
+                  </strong>
+
+                  <span> Laravel & PHP </span>
+                </div>
+
+                <div class="info-item">
+                  <strong data-ar="تطوير الأنظمة" data-en="Development">
+                    تطوير الأنظمة
+                  </strong>
+
+                  <span
+                    data-ar="من الصفر حتى الإطلاق"
+                    data-en="From scratch to launch"
+                  >
+                    من الصفر حتى الإطلاق
+                  </span>
+                </div>
+
+                <div class="info-item">
+                  <strong data-ar="قواعد البيانات" data-en="Database">
+                    قواعد البيانات
+                  </strong>
+
+                  <span> MySQL </span>
+                </div>
+
+                <div class="info-item">
+                  <strong data-ar="نوع المشاريع" data-en="Project Scope">
+                    نوع المشاريع
+                  </strong>
+
+                  <span
+                    data-ar="Web Applications & APIs"
+                    data-en="Web Applications & APIs"
+                  >
+                    Web Applications & APIs
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         SERVICES
+    ========================= -->
+
+      <section id="services">
+        <div class="container">
+          <div class="section-heading">
+            <div class="section-label" data-ar="ماذا أقدم" data-en="What I Do">
+              ماذا أقدم
+            </div>
+
+            <h2 class="section-title" data-ar="خدماتي" data-en="My Services">
+              خدماتي
+            </h2>
+
+            <p
+              class="section-description"
+              data-ar="أتعامل مع المشروع كمنظومة متكاملة، مع التركيز على بناء Backend منظم وقابل للتوسع وربطه بباقي أجزاء التطبيق."
+              data-en="I approach projects as complete systems, with a strong focus on building structured, scalable backends and connecting them with the rest of the application."
+            >
+              أتعامل مع المشروع كمنظومة متكاملة، مع التركيز على بناء Backend
+              منظم وقابل للتوسع وربطه بباقي أجزاء التطبيق.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <div class="card">
+              <div class="service-icon">&lt;/&gt;</div>
+
+              <h3 data-ar="تطبيقات ويب كاملة" data-en="Web Applications">
+                تطبيقات ويب كاملة
+              </h3>
+
+              <p
+                data-ar="تطوير تطبيقات ومنصات ويب متكاملة تبدأ من قاعدة البيانات وتنتهي بتجهيز التطبيق للإطلاق."
+                data-en="Building complete web applications and platforms, from database design to deployment."
+              >
+                تطوير تطبيقات ومنصات ويب متكاملة تبدأ من قاعدة البيانات وتنتهي
+                بتجهيز التطبيق للإطلاق.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="service-icon">API</div>
+
+              <h3 data-ar="Backend و APIs" data-en="Backend & APIs">
+                Backend و APIs
+              </h3>
+
+              <p
+                data-ar="تطوير أنظمة Backend وREST APIs منظمة باستخدام Laravel، مع المصادقة والصلاحيات وإدارة البيانات."
+                data-en="Developing structured Laravel backends and REST APIs with authentication, authorization, and data management."
+              >
+                تطوير أنظمة Backend وREST APIs منظمة باستخدام Laravel، مع
+                المصادقة والصلاحيات وإدارة البيانات.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="service-icon">▦</div>
+
+              <h3 data-ar="لوحات التحكم" data-en="Admin Dashboards">
+                لوحات التحكم
+              </h3>
+
+              <p
+                data-ar="إنشاء لوحات تحكم لإدارة المستخدمين والبيانات والمحتوى والصلاحيات باستخدام Filament."
+                data-en="Building admin dashboards for users, data, content, and permissions using Filament."
+              >
+                إنشاء لوحات تحكم لإدارة المستخدمين والبيانات والمحتوى والصلاحيات
+                باستخدام Filament.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="service-icon">₿</div>
+
+              <h3 data-ar="التكاملات والدفع" data-en="Integrations & Payments">
+                التكاملات والدفع
+              </h3>
+
+              <p
+                data-ar="ربط الأنظمة بخدمات خارجية مثل Stripe وPayPal والإشعارات وخدمات التحقق وغيرها."
+                data-en="Integrating applications with services such as Stripe, PayPal, notifications, verification services, and more."
+              >
+                ربط الأنظمة بخدمات خارجية مثل Stripe وPayPal والإشعارات وخدمات
+                التحقق وغيرها.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="service-icon">⚡</div>
+
+              <h3 data-ar="ميزات فورية" data-en="Real-Time Features">
+                ميزات فورية
+              </h3>
+
+              <p
+                data-ar="تطوير المحادثات الفورية والإشعارات والتحديثات اللحظية باستخدام WebSockets."
+                data-en="Building real-time chat, notifications, and live updates using WebSockets."
+              >
+                تطوير المحادثات الفورية والإشعارات والتحديثات اللحظية باستخدام
+                WebSockets.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="service-icon">↑</div>
+
+              <h3 data-ar="النشر والتجهيز" data-en="Deployment">
+                النشر والتجهيز
+              </h3>
+
+              <p
+                data-ar="تجهيز التطبيق للنشر وإعداده على Linux VPS وربط الخدمات الأساسية المطلوبة للتشغيل."
+                data-en="Preparing applications for deployment and configuring them on Linux VPS environments."
+              >
+                تجهيز التطبيق للنشر وإعداده على Linux VPS وربط الخدمات الأساسية
+                المطلوبة للتشغيل.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         PROJECTS
+    ========================= -->
+
+      <section id="projects">
+        <div class="container">
+          <div class="section-heading">
+            <div
+              class="section-label"
+              data-ar="أعمال مختارة"
+              data-en="Selected Work"
+            >
+              أعمال مختارة
+            </div>
+
+            <h2 class="section-title" data-ar="مشاريعي" data-en="My Projects">
+              مشاريعي
+            </h2>
+
+            <p
+              class="section-description"
+              data-ar="نماذج من الأنظمة والتطبيقات التي عملت عليها، مع التركيز على الـ Backend وقواعد البيانات والتكاملات."
+              data-en="Selected systems and applications I've worked on, with a focus on backend architecture, databases, and integrations."
+            >
+              نماذج من الأنظمة والتطبيقات التي عملت عليها، مع التركيز على الـ
+              Backend وقواعد البيانات والتكاملات.
+            </p>
+          </div>
+
+          <div class="projects-grid">
+            <!-- Skillify -->
+
+            <article class="card project-card">
+              <div class="project-image">
+                <img
+                  src="assetes\skillify.png"
+                  alt="Skillify project"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+
+              <div class="project-content">
+                <h3>Skillify</h3>
+
+                <p
+                  data-ar="منصة تربط العملاء بالمحترفين وأصحاب المهارات، مع البحث حسب الموقع، حسابات الأعمال، التحقق من الهوية باستخدام الذكاء الاصطناعي، المحادثة الفورية، معرض الخدمات وCommunity Feed."
+                  data-en="A platform connecting clients with professionals through location-based discovery, business accounts, AI identity verification, real-time chat, service galleries, and a community feed."
+                >
+                  منصة تربط العملاء بالمحترفين وأصحاب المهارات، مع البحث حسب
+                  الموقع، حسابات الأعمال، التحقق من الهوية، المحادثة الفورية
+                  ومعرض الخدمات.
+                </p>
+
+                <div class="project-tech">
+                  Laravel 13 · React · Inertia.js · Tailwind CSS · MySQL ·
+                  Reverb · Gemini AI · Leaflet
+                </div>
+
+                <a
+                  class="project-link"
+                  href="https://github.com/Mohamad-Kahwaji/Skillify"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-ar="مشاهدة المشروع على GitHub ←"
+                  data-en="View Project on GitHub →"
+                >
+                  مشاهدة المشروع على GitHub ←
+                </a>
+              </div>
+            </article>
+
+            <!-- Real Estate -->
+
+            <article class="card project-card">
+              <div class="project-image">
+                <img
+                  src="assetes/real-estate.png"
+                  alt="Real Estate Services project"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+
+              <div class="project-content">
+                <h3>Real Estate Services</h3>
+
+                <p
+                  data-ar="منصة عقارية متكاملة لإدارة الإعلانات والخدمات والطلبات، مع محادثة فورية ومشاركة الملفات والإشعارات وتسجيل عبر WhatsApp OTP وطرق دفع متعددة."
+                  data-en="A complete real estate platform for managing listings, services, and requests, with real-time chat, file sharing, notifications, WhatsApp OTP, and multiple payment methods."
+                >
+                  منصة عقارية متكاملة لإدارة الإعلانات والخدمات والطلبات، مع
+                  محادثة فورية ومشاركة الملفات والإشعارات وتسجيل عبر WhatsApp
+                  OTP.
+                </p>
+
+                <div class="project-tech">
+                  Laravel 12 · PHP · MySQL · Sanctum · Pusher · Stripe · PayPal
+                  · Firebase FCM · Bootstrap
+                </div>
+
+                <a
+                  class="project-link"
+                  href="https://github.com/Mohamad-Kahwaji/Real-estate-Services"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-ar="مشاهدة المشروع على GitHub ←"
+                  data-en="View Project on GitHub →"
+                >
+                  مشاهدة المشروع على GitHub ←
+                </a>
+              </div>
+            </article>
+
+            <!-- Mansour -->
+
+            <article class="card project-card">
+              <div class="project-image">
+                <img
+                  src="assets/mansour.png"
+                  alt="Mansour project"
+                  onerror="this.style.display = 'none'"
+                />
+              </div>
+
+              <div class="project-content">
+                <h3>Mansour</h3>
+
+                <p
+                  data-ar="موقع Corporate احترافي ثنائي اللغة مع لوحة تحكم تسمح للعميل بإدارة النصوص والصور والمشاريع والخدمات والشهادات دون تعديل الكود."
+                  data-en="A bilingual corporate website with an admin panel that allows the client to manage text, images, projects, services, and testimonials without changing the code."
+                >
+                  موقع Corporate احترافي ثنائي اللغة مع لوحة تحكم تسمح للعميل
+                  بإدارة النصوص والصور والمشاريع والخدمات دون تعديل الكود.
+                </p>
+
+                <div class="project-tech">
+                  Laravel 13 · Filament 5 · Tailwind CSS · Vite · MySQL · Spatie
+                  Media Library · Pest
+                </div>
+
+                <a
+                  class="project-link"
+                  href="https://github.com/Mohamad-Kahwaji/Mansour"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-ar="مشاهدة المشروع على GitHub ←"
+                  data-en="View Project on GitHub →"
+                >
+                  مشاهدة المشروع على GitHub ←
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         SKILLS
+    ========================= -->
+
+      <section id="skills">
+        <div class="container">
+          <div class="section-heading">
+            <div
+              class="section-label"
+              data-ar="التقنيات"
+              data-en="Technologies"
+            >
+              التقنيات
+            </div>
+
+            <h2
+              class="section-title"
+              data-ar="المهارات التقنية"
+              data-en="Technical Skills"
+            >
+              المهارات التقنية
+            </h2>
+          </div>
+
+          <div class="card">
+            <div class="skills-wrapper">
+              <span class="skill">PHP</span>
+              <span class="skill">Laravel 12 / 13</span>
+              <span class="skill">MySQL</span>
+              <span class="skill">REST APIs</span>
+              <span class="skill">Laravel Sanctum</span>
+              <span class="skill">Eloquent ORM</span>
+
+              <span class="skill">React</span>
+              <span class="skill">Inertia.js</span>
+              <span class="skill">JavaScript</span>
+
+              <span class="skill">HTML / CSS</span>
+              <span class="skill">Tailwind CSS</span>
+              <span class="skill">Bootstrap</span>
+
+              <span class="skill">Filament</span>
+
+              <span class="skill">Laravel Reverb</span>
+              <span class="skill">Pusher</span>
+              <span class="skill">WebSockets</span>
+
+              <span class="skill">Stripe</span>
+              <span class="skill">PayPal</span>
+
+              <span class="skill">Firebase FCM</span>
+              <span class="skill">WhatsApp OTP</span>
+
+              <span class="skill">Google Gemini AI</span>
+              <span class="skill">Leaflet Maps</span>
+
+              <span class="skill">Pest Testing</span>
+
+              <span class="skill">Git / GitHub</span>
+              <span class="skill">Linux VPS</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         CONTACT
+    ========================= -->
+
+      <section id="contact">
+        <div class="container">
+          <div class="card contact-card">
+            <div
+              class="section-label"
+              data-ar="لنبدأ العمل"
+              data-en="Let's Work Together"
+            >
+              لنبدأ العمل
+            </div>
+
+            <h2
+              class="section-title"
+              data-ar="لديك فكرة مشروع؟"
+              data-en="Have a project idea?"
+            >
+              لديك فكرة مشروع؟
+            </h2>
+
+            <p
+              class="section-description"
+              data-ar="إذا كنت تبحث عن مطور يستطيع التعامل مع المشروع كمنظومة متكاملة، من الـ Backend وقاعدة البيانات إلى الواجهات والتكاملات، تواصل معي."
+              data-en="If you're looking for a developer who can handle a project as a complete system — from backend and database to frontend and integrations — let's talk."
+            >
+              إذا كنت تبحث عن مطور يستطيع التعامل مع المشروع كمنظومة متكاملة، من
+              الـ Backend وقاعدة البيانات إلى الواجهات والتكاملات، تواصل معي.
+            </p>
+
+            <div class="socials">
+              <a
+                href="https://github.com/Mohamad-Kahwaji"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/mohamad-kahwaji-laravel/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+
+              <a
+                href="https://wa.me/963995227120"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp
+              </a>
+
+              <a href="mailto:mohamad.17.kahwaji@gmail.com"> Email </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================
+       FOOTER
+  ========================= -->
+
+    <footer>
+      <div class="container">
+        © 2026 Mohamad Al-Kahwaji —
+
+        <span data-ar="جميع الحقوق محفوظة" data-en="All rights reserved">
+          جميع الحقوق محفوظة
+        </span>
+      </div>
+    </footer>
+
+    <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+    <script>
+      const languageBtn = document.getElementById("languageBtn");
+
+      const menuBtn = document.getElementById("menuBtn");
+
+      const navLinks = document.getElementById("navLinks");
+
+      let currentLanguage = localStorage.getItem("language") || "ar";
+
+      function setLanguage(language) {
+        currentLanguage = language;
+
+        document.documentElement.lang = language;
+
+        document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+
+        document.querySelectorAll("[data-ar]").forEach((element) => {
+          const translation = element.dataset[language];
+
+          if (translation) {
+            element.textContent = translation;
+          }
+        });
+
+        languageBtn.textContent = language === "ar" ? "English" : "العربية";
+
+        localStorage.setItem("language", language);
+      }
+
+      languageBtn.addEventListener("click", () => {
+        const newLanguage = currentLanguage === "ar" ? "en" : "ar";
+
+        setLanguage(newLanguage);
+      });
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+        });
+      });
+
+      setLanguage(currentLanguage);
+    </script>
+  </body>
+</html>
